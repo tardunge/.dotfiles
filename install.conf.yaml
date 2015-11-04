@@ -1,0 +1,10 @@
+- clean: ['~']
+
+- link:
+    ~/.bashrc:
+        path: bashrc
+        create: false
+        relink: false
+        force: false
+
+
