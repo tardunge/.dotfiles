@@ -67,8 +67,9 @@ nnoremap <C-H> <C-W><C-H>
 execute pathogen#infect()
 syntax on
 set term=screen-256color
+nnoremap <leader>u :GundoToggle<CR>
+:set grepprg=ack
 
-
-"Eclim Confs
+"Eclim Confs Never use eclim.. build your own
 set nocompatible
 filetype plugin indent on
