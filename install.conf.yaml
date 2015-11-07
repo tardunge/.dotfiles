@@ -6,5 +6,18 @@
         create: false
         relink: false
         force: false
-
-
+    ~/.tmux.conf: tmux.conf
+    ~/.vim:
+        path: vim/
+        create: true
+        relink: true
+        force: false
+    ~/.vimrc:
+        path: vimrc
+        create: true
+        relink: true
+        force: false
+    ~/.zshrc:
+        path: zshrc
+        relink: true
+        force: false
