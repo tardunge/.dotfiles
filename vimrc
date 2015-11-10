@@ -69,6 +69,7 @@ syntax on
 set term=screen-256color
 nnoremap <leader>u :GundoToggle<CR>
 :set grepprg=ack
+"let g:ack_default_options
 
 "Eclim Confs Never use eclim.. build your own
 set nocompatible
