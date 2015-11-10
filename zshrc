@@ -1,12 +1,14 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/manoj/.oh-my-zsh
+export ZSH=/home/manoj/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
-
+#ZSH_THEME="agnoster"
+ZSH_THEME="powerline"
+#ZSH_THEME="random"
+POWERLINE_HIDE_HOST_NAME="true"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -24,7 +26,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -49,11 +51,11 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git mvn)
 
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/bin/powerline-config"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -64,8 +66,10 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
+#export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -73,6 +77,12 @@ else
   export EDITOR='vim'
 fi
 
+#Powerline-Settings
+#if [[ -r /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+#    source /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
+#fi
+#export TERM=xterm-256color
+[[ $TMUX = "" ]] && export TERM=xterm-256color
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
