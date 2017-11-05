@@ -1,6 +1,5 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/manoj/.oh-my-zsh
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -9,6 +8,8 @@ export ZSH=/home/manoj/.oh-my-zsh
 ZSH_THEME="powerline"
 #ZSH_THEME="random"
 POWERLINE_HIDE_HOST_NAME="true"
+POWERLINE_PATH="short"
+POWERLINE_DETECT_SSH="true"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -56,6 +57,9 @@ plugins=(git mvn)
 # User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/bin/powerline-config"
+export SCALA_HOME=/usr/local/src/scala/scala-2.10.4
+export PATH=$SCALA_HOME/bin:$PATH
+#
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -97,3 +101,18 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export VOOBLY_HOME=/home/manoj/.wine/dosdevices/c:/Program\ Files\ \(x86\)/Voobly/
+installVooblyMod(){
+  export STAGING_WRITECOPY=1 && /opt/wine-staging/bin/wine ${VOOBLY_HOME}voobly.exe $1
+}
+alias voobly="export STAGING_WRITECOPY=1 && cd /home/manoj/.wine/dosdevices/c:/Program\ Files\ \(x86\)/Voobly/ && /opt/wine-staging/bin/wine voobly.exe 2>&1 > /dev/null &"
+alias ll="ls -al"
+alias jedit="/home/manoj/jee-latest-released/eclipse/eclipse"
+alias torrent="/usr/bin/utserver -settingspath /opt/utorrent-server-alpha-v3_3"
+alias conterstrike="/home/manoj/Downloads/Counter Strike 1.6/hl.exe -game cstrike -console -noforcemparms -noforcemaccel -noforcemspd -freq 60"
+alias solr='/opt/solr/bin/solr'
+alias eclipse="/home/manoj/jee-latest-released/eclipse/eclipse"
+alias sqlworkbench="java -jar /home/manoj/Downloads/Workbench-Build119/sqlworkbench.jar"
+if [ -x /usr/games/cowsay -a -x /usr/games/fortune ]; then
+        fortune | cowsay
+fi
