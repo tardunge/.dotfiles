@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/manoj/.dotfiles'
-let g:netrw_dirhist_2='/usr/local/lib/python2.7/dist-packages/powerline/bindings'
-let g:netrw_dirhist_3='/usr/local/lib/python2.7/dist-packages/powerline/bindings/tmux'
-let g:netrw_dirhist_4='/home/manoj/.oh-my-zsh/themes'
-let g:netrw_dirhist_5='/home/manoj/oh-my-zsh-powerline-theme/powerline-fonts'
-let g:netrw_dirhist_6='/home/manoj/mapi/src'
