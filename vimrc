@@ -84,6 +84,9 @@ tnoremap <C-W>n <C-\><C-n>
 " doesn't resize the windows if the quickfix or any pane is closed.
 set noequalalways
 
+" advanced search resource #visualstar.vim https://vim.fandom.com/wiki/Search_for_visually_selected_text
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
 " leetcode settings
 let g:leetcode_browser = 'chrome'
 let g:leetcode_solution_filetype = 'python3'

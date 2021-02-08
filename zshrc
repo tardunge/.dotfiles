@@ -8,7 +8,7 @@ alias cat=bat
 alias kak='kubectl apply -k'
 export ZSH="/Users/manojbabu/.oh-my-zsh"
 # export TERM="xterm-256color"
-export POWERLINE="/Users/manojbabu/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh"
+# export POWERLINE="/Users/manojbabu/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh"
 export KUBE_EDITOR="nvim"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -26,6 +26,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext pyenv virtualenv_joined )
 POWERLEVEL9K_PYENV_PROMPT_ALWAYS_SHOW=true
 POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="sammy"
 
 DISABLE_UPDATE_PROMPT="true"
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -44,9 +45,8 @@ PATH="/usr/local/Cellar/libpq/13.0_1/bin:$PATH"
 
 # asdf path settings for managing versions of nodejs, python, helm, kubectl
 . $HOME/.asdf/asdf.sh
-
 . $HOME/.asdf/completions/asdf.bash
-if [ /Users/manojbabu/.asdf/shims/kubectl ]; then source <(kubectl completion zsh); fi
+# if [ /Users/manojbabu/.asdf/shims/kubectl ]; then source <(kubectl completion zsh); fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -66,17 +66,19 @@ export FZF_ALT_C_COMMAND="fd --type d $FD_OPTS"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview,ctrl-q:abort'"
 export FZF_ALT_C_OPTS="--preview 'tree -C -L 2 {} | head -200'"
 
-# Load nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-autoload compinit && compinit
-autoload bashcompinit && bashcompinit
-source ~/.bash_completion.d/breeze-complete
+# TMUX FZF OPTS
+
+# Load nvm UNCOMMENT ONLY WHILE USING NODE, INCREASES OVERHEAD TO LOAD SHELL min 3 SEC
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# autoload compinit && compinit
+# autoload bashcompinit && bashcompinit
+# source ~/.bash_completion.d/breeze-complete
 
 # Go Workspace
 export GOPATH=$HOME/go
-export GOROOT="$(brew --prefix golang)/libexec"
+export GOROOT="/usr/local/opt/go/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -88,3 +90,9 @@ if [ -f '/Users/manojbabu/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/manojbabu/.sdkman"
 [[ -s "/Users/manojbabu/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/manojbabu/.sdkman/bin/sdkman-init.sh"
+
+# utility func to benchmark zsh load time
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
