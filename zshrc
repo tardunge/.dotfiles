@@ -15,13 +15,15 @@ export LANG=en_US.UTF-8
 export CLOUDSDK_PYTHON=/Users/manojbabu/.pyenv/versions/neovim3/bin/python
 export CLOUDSDK_PYTHON_SITEPACKAGES=1
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+alias fketi="kgp --no-headers | awk '{print "\$"1}' | fzf --preview 'kubectl get pod {} -o yaml'| xargs -o -I % kubectl exec -it % -- /bin/sh"
+alias fkd="k get all --no-headers  --all-namespaces | awk '{printf\"%s/%s\\n\","\$"1,"\$"2}' | fzf | xargs -o kubectl describe"
 
 # oh-my-zsh customization
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_unique"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_SHORTEN_DELIMITER=''
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir_writable dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext pyenv virtualenv_joined )
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(pyenv virtualenv_joined )
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext)
 POWERLEVEL9K_PYENV_PROMPT_ALWAYS_SHOW=true
 POWERLEVEL9K_MODE='nerdfont-complete'
@@ -59,7 +61,7 @@ export PAGER='bat' # commands like man e.t.c will now use bat instead of less
 # FD OPTS For FZF
 FD_OPTS="--follow --exclude .git --exclude site-packages --exclude .venv --exclude Containers --exclude google --exclude Google"
 # FZF Settings
-export FZF_DEFAULT_OPTS="--no-mouse --multi --height 40% --reverse --preview='if [[ -f {} ]];then bat --style=full --color=always {};elif [[ -d {} ]];then tree -C -L 2 {} | head -200;else echo {}; fi' --bind=';:execute(bat --style=full --color=always {} || less -f {}),?:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-q:abort'"
+export FZF_DEFAULT_OPTS="--no-mouse --multi --height 40% --reverse --preview='if [[ -f {} ]];then bat --style=full --color=always {};elif [[ -d {} ]];then tree -C -L 2 {} | head -200;else echo {}; fi' --bind=';:execute(bat --style=full --color=always {} || less -f {}),?:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-q:abort,K:preview-up,J:preview-down'"
 export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l $FD_OPTS"
 export FZF_CTRL_T_COMMAND="fd $FD_OPTS"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTS"
