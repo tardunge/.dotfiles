@@ -50,6 +50,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'samoshkin/vim-find-files'
+Plug 'solarnz/thrift.vim'
 " Plug 'vim-python/python-syntax'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'psf/black'

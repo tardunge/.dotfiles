@@ -83,6 +83,9 @@ export GOPATH=$HOME/go
 export GOROOT="/usr/local/opt/go/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
+# SPARK_HOME
+SPARK_HOME="/Users/manojbabu/spark"
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/manojbabu/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/manojbabu/google-cloud-sdk/path.zsh.inc'; fi
 
