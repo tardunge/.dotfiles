@@ -65,6 +65,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'SirVer/ultisnips'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'ianding1/leetcode.vim'
+Plug 'artur-shaik/vim-javacomplete2'
 call plug#end()
 
 filetype off
@@ -73,6 +74,10 @@ filetype plugin indent on
 " colorscheme
 " load colorscheme before semshi
 colorscheme PaperColor
+
+" Deoplete for auto completion.
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('ignore_case', v:true)
 
 " automatically wrap the lines in a quickfix window
 " augroup quickfix
@@ -96,6 +101,14 @@ nnoremap <leader>ll :LeetCodeList<cr>
 nnoremap <leader>lt :LeetCodeTest<cr>
 nnoremap <leader>ls :LeetCodeSubmit<cr>
 nnoremap <leader>li :LeetCodeSignIn<cr>
+
+" java settings
+augroup java
+  autocmd!
+
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+augroup END
 
 " Ripgrep command Smartcase
 let g:rg_command = 'rg --vimgrep -S'
@@ -287,10 +300,6 @@ let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
-
-" Deoplete for auto completion.
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('ignore_case', v:true)
 
 " function! LightlineFilename()
 " Lightline settings
