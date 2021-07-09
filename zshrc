@@ -17,6 +17,7 @@ export CLOUDSDK_PYTHON_SITEPACKAGES=1
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 alias fketi="kgp --no-headers | awk '{print "\$"1}' | fzf --preview 'kubectl get pod {} -o yaml'| xargs -o -I % kubectl exec -it % -- /bin/sh"
 alias fkd="k get all --no-headers  --all-namespaces | awk '{printf\"%s/%s\\n\","\$"1,"\$"2}' | fzf | xargs -o kubectl describe"
+alias tls="tmux list-sessions"
 
 # oh-my-zsh customization
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_unique"
@@ -38,6 +39,9 @@ plugins=(git zsh-completions kubectl kubetail)
 
 source $ZSH/oh-my-zsh.sh
 # end of oh-my-zsh customization
+
+# nord dir-colors
+test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 
 # user conf
 eval "$(pyenv init -)"
@@ -80,7 +84,7 @@ export FZF_ALT_C_OPTS="--preview 'tree -C -L 2 {} | head -200'"
 
 # Go Workspace
 export GOPATH=$HOME/go
-export GOROOT="/usr/local/opt/go/libexec"
+export GOROOT="$(asdf where golang)/go/"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # SPARK_HOME
@@ -96,6 +100,7 @@ if [ -f '/Users/manojbabu/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users
 export SDKMAN_DIR="/Users/manojbabu/.sdkman"
 [[ -s "/Users/manojbabu/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/manojbabu/.sdkman/bin/sdkman-init.sh"
 
+eval "$(direnv hook zsh)"
 # utility func to benchmark zsh load time
 timezsh() {
   shell=${1-$SHELL}

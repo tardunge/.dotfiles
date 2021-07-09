@@ -1,11 +1,7 @@
 " Vimrc using https://jdhao.github.io/2018/12/24/centos_nvim_install_use_guide_en/
 " REF: https://www.youtube.com/watch?v=qgG5Jhi_Els
 " TODO: Plugins Required
-" 	1. Auto Formatting  # installed Black
-" 	2. Project wide Search
-"   3. Matchit.vim for python
-"   4. Ctags
-"   5. Learn Marks
+"    # nothing here
 
 " TODO: Get lightline style file names on tabline
 "	and full file name in the status-line
@@ -16,11 +12,20 @@ function! StatusLineGitBranch()
 endfunction
 
 " Vim Buffet Custom Colors compatible with PaperColor - Author: Manoj
+" function! g:BuffetSetCustomColors()
+"     hi! BuffetCurrentBuffer cterm=bold ctermbg=73 ctermfg=0 guibg=#808080 guifg=#808080
+"     hi! BuffetActiveBuffer cterm=None ctermbg=8 ctermfg=73 guibg=#808080 guifg=#808080
+"     hi! BuffetBuffer cterm=None ctermbg=8 ctermfg=245 guibg=#808080 guifg=#808080
+"     hi! BuffetTab cterm=None ctermbg=251 ctermfg=0 guibg=#808080 guifg=#808080
+"     hi! BuffetTrunc cterm=NONE ctermbg=73 ctermfg=8 guibg=#808080 guifg=#000000
+" endfunction
+
+" Vim Buffet Custom Colors compatible with Nord - Author: Manoj
 function! g:BuffetSetCustomColors()
-    hi! BuffetCurrentBuffer cterm=bold ctermbg=73 ctermfg=0 guibg=#808080 guifg=#808080
-    hi! BuffetActiveBuffer cterm=None ctermbg=8 ctermfg=73 guibg=#808080 guifg=#808080
-    hi! BuffetBuffer cterm=None ctermbg=8 ctermfg=245 guibg=#808080 guifg=#808080
-    hi! BuffetTab cterm=None ctermbg=251 ctermfg=0 guibg=#808080 guifg=#808080
+    hi! BuffetCurrentBuffer cterm=bold ctermbg=6 ctermfg=8 guibg=#808080 guifg=#808080
+    hi! BuffetActiveBuffer cterm=None ctermbg=8 ctermfg=6 guibg=#808080 guifg=#808080
+    hi! BuffetBuffer cterm=None ctermbg=8 ctermfg=12 guibg=#808080 guifg=#808080
+    hi! BuffetTab cterm=None ctermbg=12 ctermfg=0 guibg=#808080 guifg=#808080
     hi! BuffetTrunc cterm=NONE ctermbg=73 ctermfg=8 guibg=#808080 guifg=#000000
 endfunction
 
@@ -62,10 +67,12 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'leafgarland/typescript-vim'
 Plug 'SirVer/ultisnips'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'ianding1/leetcode.vim'
 Plug 'artur-shaik/vim-javacomplete2'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 filetype off
@@ -73,11 +80,13 @@ filetype plugin indent on
 " set rtp+=/usr/local/bin/fzf
 " colorscheme
 " load colorscheme before semshi
-colorscheme PaperColor
+colorscheme nord
+" overwrite nord visual selection
+:hi Visual ctermbg=12 ctermfg=0 guifg=6
 
 " Deoplete for auto completion.
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('ignore_case', v:true)
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option('ignore_case', v:true)
 
 " automatically wrap the lines in a quickfix window
 " augroup quickfix
@@ -147,7 +156,7 @@ nmap <leader>9 <Plug>BuffetSwitch(9)
 nmap <leader>0 <Plug>BuffetSwitch(10)
 let g:buffet_use_devicons = 1
 let g:buffet_always_show_tabline = 1
-let g:buffet_powerline_separators = 1
+let g:buffet_powerline_separators = 0
 let g:buffet_show_index = 1
 let g:buffet_tab_icon = ""
 let g:buffet_left_trunc_icon = ""
@@ -304,7 +313,7 @@ let g:NERDTrimTrailingWhitespace = 1
 " function! LightlineFilename()
 " Lightline settings
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
+      \ 'colorscheme': 'nord',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
