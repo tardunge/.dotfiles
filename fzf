@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+# source fzf first
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# FD OPTS For FZF
+FD_OPTS="--follow --exclude .git --exclude site-packages --exclude .venv --exclude Containers --exclude google --exclude Google"
+# FZF Settings
+export FZF_DEFAULT_OPTS="--no-mouse --multi --height 40% --reverse --preview='if [[ -f {} ]];then bat --style=full --color=always {};elif [[ -d {} ]];then tree -C -L 2 {} | head -200;else echo {}; fi' --bind=';:execute(bat --style=full --color=always {} || less -f {}),?:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-q:abort,K:preview-up,J:preview-down'"
+export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l $FD_OPTS"
+export FZF_CTRL_T_COMMAND="fd $FD_OPTS"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTS"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview,ctrl-q:abort'"
+export FZF_ALT_C_OPTS="--preview 'tree -C -L 2 {} | head -200'"
