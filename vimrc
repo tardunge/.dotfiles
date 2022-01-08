@@ -1,10 +1,6 @@
-" Vimrc using https://jdhao.github.io/2018/12/24/centos_nvim_install_use_guide_en/
+" Vimrc
 " REF: https://www.youtube.com/watch?v=qgG5Jhi_Els
-" TODO: Plugins Required
-"    # nothing here
 
-" TODO: Get lightline style file names on tabline
-"	and full file name in the status-line
 
 " Git branch on status line helper
 function! StatusLineGitBranch()
@@ -37,6 +33,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvie/vim-flake8'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
@@ -134,8 +131,8 @@ let g:mapleader = ","
 " Python Syntax highlighting
 " let g:python_highlight_all = 1
 " NeoVim python  settings
-let g:python_host_prog="/Users/manojbabu/.pyenv/versions/neovim2/bin/python"
-let g:python3_host_prog="/Users/manojbabu/.pyenv/versions/neovim3/bin/python"
+" let g:python_host_prog="/Users/manojbabu/.pyenv/versions/neovim2/bin/python"
+" let g:python3_host_prog=$HOME."/.pyenv/versions/neovim3/bin/python"
 
 " Cmdline bindings
 :cnoremap <C-A> <Home>
