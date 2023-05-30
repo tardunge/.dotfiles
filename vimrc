@@ -4,7 +4,7 @@
 
 " Git branch on status line helper
 function! StatusLineGitBranch()
-    return fugitive#head() == "" ? "" : ' '.fugitive#head()
+    return fugitive#statusline() == "" ? "" : ' '.fugitive#statusline()
 endfunction
 
 " Vim Buffet Custom Colors compatible with PaperColor - Author: Manoj
@@ -30,9 +30,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " run :PlugInstall command to install plugins for the first time.
 Plug 'ryanoasis/vim-devicons'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+" Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvie/vim-flake8'
 " Plug 'vim-airline/vim-airline'
@@ -65,10 +65,10 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'leafgarland/typescript-vim'
-Plug 'SirVer/ultisnips'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" Plug 'SirVer/ultisnips'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'ianding1/leetcode.vim'
-Plug 'artur-shaik/vim-javacomplete2'
+" Plug 'artur-shaik/vim-javacomplete2'
 Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
@@ -109,12 +109,12 @@ nnoremap <leader>ls :LeetCodeSubmit<cr>
 nnoremap <leader>li :LeetCodeSignIn<cr>
 
 " java settings
-augroup java
-  autocmd!
-
-  autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-augroup END
+" augroup java
+"   autocmd!
+"
+"   autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"
+" augroup END
 
 " Ripgrep command Smartcase
 let g:rg_command = 'rg --vimgrep -S'
@@ -128,11 +128,11 @@ autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType go setlocal ts=4 sts=4 sw=4 expandtab
 " Leader key declaration
 let g:mapleader = ","
+
 " Python Syntax highlighting
 " let g:python_highlight_all = 1
 " NeoVim python  settings
-" let g:python_host_prog="/Users/manojbabu/.pyenv/versions/neovim2/bin/python"
-" let g:python3_host_prog=$HOME."/.pyenv/versions/neovim3/bin/python"
+let g:python3_host_prog=$HOME."/.pyenv/versions/neovim-py3/bin/python"
 
 " Cmdline bindings
 :cnoremap <C-A> <Home>
@@ -189,7 +189,7 @@ nnoremap <leader>bl :Black<CR>
 set cul " always highlight cursor line
 
 " Disable method preview window of deoplete jedi 
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Disable auto comment on new line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -329,6 +329,7 @@ let g:lightline.enable = {'tabline' : 0 }
 " let g:airline#extensions#tabline#left_alt_sep = '|'
 " let g:airline_powerline_fonts = 1
 " let g:airline_theme='base16_grayscale'
+
 
 " Edit and Source Vimrc,tmux,zshrc on the fly
 :let tmux_conf = $HOME.'/.tmux.conf'

@@ -25,7 +25,6 @@ export GOPATH=$HOME/go
 export GOROOT="$(asdf where golang)/go/"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
-
 # source pyenv
 # Use pyenv to manage python versions. asdf has trouble with apple m1 processors
 [[ -s $DOTFILES/pyenv ]] && source $DOTFILES/pyenv
@@ -36,7 +35,8 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 
 # source after PATH variable modifications are done.
-[[ -s $DOTFILES/asdf/asdf ]] && source $DOTFILES/asdf/asdf
+#[[ -s $DOTFILES/asdf/asdf ]] && source $DOTFILES/asdf/asdf
+. ~/.asdf/plugins/java/set-java-home.zsh
 
 # source fzf and its conf
 [[ -s $DOTFILES/fzf ]] && source $DOTFILES/fzf
