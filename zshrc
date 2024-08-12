@@ -12,6 +12,9 @@ setopt nocorrectall
 # Source aliases
 [[ -s $DOTFILES/profile ]] && source $DOTFILES/profile
 
+ #disable auto correct
+setopt nocorrectall
+
 # GENERAL VARIABLES
 export LC_ALL=en_US.UTF-8
 export MANPATH="/usr/bin/man:$MANPATH"
@@ -44,12 +47,6 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 # source fzf and its conf
 [[ -s $DOTFILES/fzf ]] && source $DOTFILES/fzf
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/manojbabu/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/manojbabu/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/manojbabu/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/manojbabu/google-cloud-sdk/completion.zsh.inc'; fi
-
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/manojbabu/.sdkman"
 [[ -s "/Users/manojbabu/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/manojbabu/.sdkman/bin/sdkman-init.sh"
@@ -61,3 +58,23 @@ timezsh() {
   shell=${1-$SHELL}
   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/tardunge/medica/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/tardunge/medica/google-cloud-sdk/path.zsh.inc'; fi
+
+# PKG CONFIG -- required for icu4c
+
+# icu4c is keg-only, which means it was not symlinked into /opt/homebrew,
+# because macOS provides libicucore.dylib (but nothing else).
+
+# If you need to have icu4c first in your PATH, run:
+export PATH="/opt/homebrew/opt/icu4c/bin:$PATH"
+export PATH="/opt/homebrew/opt/icu4c/sbin:$PATH"
+
+# For compilers to find icu4c you may need to se
+export LDFLAGS="-L/opt/homebrew/opt/icu4c/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/icu4c/include"
+
+# For pkg-config to find icu4c you may need to set:
+export PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c/lib/pkgconfig"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

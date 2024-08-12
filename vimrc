@@ -29,6 +29,7 @@ endfunction
 call plug#begin('~/.local/share/nvim/plugged')
 
 " run :PlugInstall command to install plugins for the first time.
+Plug 'hashivim/vim-terraform'
 Plug 'ryanoasis/vim-devicons'
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
@@ -48,7 +49,8 @@ Plug 'sjl/gundo.vim'
 Plug 'bagrat/vim-buffet'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mhinz/vim-startify'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'samoshkin/vim-find-files'
@@ -61,9 +63,11 @@ Plug '/usr/local/bin/fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'dyng/ctrlsf.vim'
-Plug 'jremmen/vim-ripgrep'
+" Plug 'jremmen/vim-ripgrep'
+Plug 'wookayin/fzf-ripgrep.vim'
 Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sebdah/vim-delve'
 Plug 'leafgarland/typescript-vim'
 " Plug 'SirVer/ultisnips'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -81,6 +85,7 @@ colorscheme nord
 " overwrite nord visual selection
 :hi Visual ctermbg=12 ctermfg=0 guifg=6
 
+set updatetime=100
 " Deoplete for auto completion.
 " let g:deoplete#enable_at_startup = 1
 " call deoplete#custom#option('ignore_case', v:true)
@@ -161,8 +166,9 @@ let g:buffet_right_trunc_icon = ""
 
 " Markdown preview mappins
 nmap <leader>op <Plug>MarkdownPreview
-nmap <leader>sp <Plug>MarkdownPreviewStop
-nmap <leader>tp <Plug>MarkdownPreviewToggle
+
+" Ripgrep + fzf
+nmap <leader>rg :Rg<CR>
 
 " Vim Buffet Buffer mappings
 " noremap <Tab> :bn<CR>
@@ -170,6 +176,9 @@ nmap <leader>tp <Plug>MarkdownPreviewToggle
 " noremap <Leader><Tab> :Bw<CR>
 " noremap <Leader><S-Tab> :Bonly<CR>
 " noremap <C-t> :tabnew split<CR>
+
+" <C-]> to jump to the tags under cursor. Helpful to navigate help sections.
+noremap <C-w>t :tabnew<CR>
 
 " let g:go_debug=['shell-commands']
 let g:go_term_enabled = 1
@@ -195,13 +204,40 @@ set cul " always highlight cursor line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 let g:go_decls_includes = "func,type"
+
+" Enable syntax highlighting per default
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+
+" Go Debugger options and bindings
+let g:delve_breakpoint_sign_highlight = "healthError"
+let g:delve_tracepoint_sign_highlight = "healthWarning"
+nnoremap <silent> <Plug>(dlv-debug) :<C-u>call delve#dlvDebug(expand('%:p:h'))<CR>
+nnoremap <silent> <Plug>(dlv-toggle-breakpoint) :<C-u>call delve#toggleBreakpoint(delve#getFile(), line('.'))<CR>
+nnoremap <silent> <Plug>(dlv-toggle-tracepoint) :<C-u>call delve#toggleTracepoint(delve#getFile(), line('.'))<CR>
+nnoremap <silent> <Plug>(dlv-clear-bp) :<C-u>call delve#clearAll()<CR>
 augroup go
   autocmd!
 
+  " delve debug bindings
+  autocmd FileType go nmap <silent> <leader>dd  <Plug>(dlv-debug)
+  autocmd FileType go nmap <silent> <leader>db  <Plug>(dlv-toggle-breakpoint)
+  autocmd FileType go nmap <silent> <leader>dt  <Plug>(dlv-toggle-tracepoint)
+  autocmd FileType go nmap <silent> <leader>dc  <Plug>(dlv-clear-bp)
+
+  " vim-go bindings
   autocmd FileType go nmap <silent> <Leader>gop  <Plug>(go-doc-browser)
   autocmd FileType go nmap <silent> <Leader>go  <Plug>(go-doc)
   autocmd FileType go nmap <silent> <Leader>gf  <Plug>(go-referrers)
   autocmd FileType go nmap <silent> <Leader>gd  <Plug>(go-decls)
+  autocmd FileType go nmap <silent> <Leader>gdv  <Plug>(go-def-vertical)
+  autocmd FileType go nmap <silent> <Leader>gds  <Plug>(go-def-split)
   autocmd FileType go nmap <silent> <Leader>gl  <Plug>(go-metalinter)
   autocmd FileType go nmap <silent> <Leader>gt  <Plug>(go-diagnostics)
   autocmd FileType go nmap <silent> <Leader>gr  <Plug>(go-run)
@@ -211,7 +247,11 @@ augroup go
   autocmd FileType go nmap <silent> <leader>tf  <Plug>(go-test-func)
   autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+
 augroup END
+
+" vim-signigy options
+nnoremap <leader>sy :SignifyToggle<cr>
 
 " set nofixeol for filetype dot
 autocmd FileType dot,lua setlocal nofixeol
@@ -256,6 +296,7 @@ nnoremap <leader>h :History<cr>
 nnoremap <leader>c :History:<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>w :Wipeouts<cr>
+nnoremap <leader>cc :Commands<cr>
 
 " Fugitive Bindings
 " nnoremap <leader>gs :Gstatus<cr>
@@ -356,6 +397,68 @@ nnoremap <Down> :echoe "Use j"<CR>
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+"----------------------------------------------
+" Language: Bash
+"----------------------------------------------
+au FileType sh set noexpandtab
+au FileType sh set shiftwidth=2
+au FileType sh set softtabstop=2
+au FileType sh set tabstop=2
+
+"----------------------------------------------
+" Language: gitcommit
+"----------------------------------------------
+au FileType gitcommit setlocal spell
+au FileType gitcommit setlocal textwidth=80
+
+"----------------------------------------------
+" Language: gitconfig
+"----------------------------------------------
+au FileType gitconfig set noexpandtab
+au FileType gitconfig set shiftwidth=2
+au FileType gitconfig set softtabstop=2
+au FileType gitconfig set tabstop=2
+
+"----------------------------------------------
+" Language: Protobuf
+"----------------------------------------------
+au FileType proto set expandtab
+au FileType proto set shiftwidth=2
+au FileType proto set softtabstop=2
+au FileType proto set tabstop=2
+
+"----------------------------------------------
+" Language: Python
+"----------------------------------------------
+au FileType python set expandtab
+au FileType python set shiftwidth=4
+au FileType python set softtabstop=4
+au FileType python set tabstop=4
+
+"----------------------------------------------
+" Language: Thrift
+"----------------------------------------------
+au FileType thrift set expandtab
+au FileType thrift set shiftwidth=2
+au FileType thrift set softtabstop=2
+au FileType thrift set tabstop=2
+
+"----------------------------------------------
+" Language: YAML
+"----------------------------------------------
+au FileType yaml set expandtab
+au FileType yaml set shiftwidth=2
+au FileType yaml set softtabstop=2
+au FileType yaml set tabstop=2
+
+"----------------------------------------------
+" Language: Golang
+"----------------------------------------------
+au FileType go set noexpandtab
+au FileType go set shiftwidth=4
+au FileType go set softtabstop=4
+au FileType go set tabstop=4
 
 " Git-gutter Settings
 " nmap <expr> ]d &diff ? ']czz' : '<Plug>(GitGutterNextHunkzz)'
