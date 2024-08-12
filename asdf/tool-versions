@@ -1,6 +1,6 @@
 python system
 golang 1.17.6
-nodejs 17.3.0
+nodejs 22.6.0
 java adoptopenjdk-11.0.15+10
 helm 3.11.2
 rust 1.79.0

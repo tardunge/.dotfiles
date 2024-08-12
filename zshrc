@@ -3,6 +3,9 @@
 # Path to Dotfiles dir clone.
 export DOTFILES="$HOME/dotfiles"
 
+# disable auto correct
+setopt nocorrectall
+
 # Source ohmyzsh config.
 [[ -s $DOTFILES/ohmyzsh ]] && source $DOTFILES/ohmyzsh
 
