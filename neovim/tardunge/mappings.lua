@@ -62,5 +62,6 @@ map("n", "<c-n>", "<Plug>(YankyNextEntry)")
 -- deleted text in the default register.
 vim.api.nvim_set_keymap("n", "x", '"_x', { noremap = true })
 vim.api.nvim_set_keymap("v", "x", '"_x', { noremap = true })
-vim.api.nvim_set_keymap("n", "d", '"_d', { noremap = true })
-vim.api.nvim_set_keymap("v", "d", '"_d', { noremap = true })
+-- dd and p doesn't work.
+--vim.api.nvim_set_keymap("n", "d", '"_d', { noremap = true })
+--vim.api.nvim_set_keymap("v", "d", '"_d', { noremap = true })
