@@ -78,3 +78,15 @@ export CPPFLAGS="-I/opt/homebrew/opt/icu4c/include"
 # For pkg-config to find icu4c you may need to set:
 export PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c/lib/pkgconfig"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Switch to rustup version
+use_rustup() {
+    export PATH="$HOME/.cargo/bin:$PATH"
+    echo "Switched to rustup Rust"
+}
+
+# Switch to asdf version
+use_asdf() {
+    export PATH="$HOME/.asdf/shims:$PATH"
+    echo "Switched to asdf Rust"
+}

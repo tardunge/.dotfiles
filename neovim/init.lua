@@ -13,16 +13,20 @@
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.win_zoom = 1
-  
+
+-- load before lazy.
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
+
+require("plugins")
 -- Vanilla Config
-require('tardunge.settings')
-require('tardunge.plugins')
-require('tardunge.plugin-setup')
-require('tardunge.mappings')
-require('tardunge.cmp')
+require("settings")
+-- require("tardunge.plugin-setup")
+require("mappings")
+--require('tardunge.cmp')
 
 ---Pretty print lua table
 function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, { ... })
-    print(unpack(objects))
+	local objects = vim.tbl_map(vim.inspect, { ... })
+	print(unpack(objects))
 end
